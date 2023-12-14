@@ -73,40 +73,38 @@ const fragmentShader = `
   }
 `;
 
-const StarNestMaterial = shaderMaterial(
-  { iTime: 0, iMouse: new THREE.Vector2(), iResolution: new THREE.Vector3() },
-  vertexShader,
-  fragmentShader
-);
-
-extend({ StarNestMaterial });
-
 export default function Background() {
   const ref = useRef<THREE.Mesh>();
   const { size, clock, mouse } = useThree();
 
-  const material = useMemo(() => new StarNestMaterial(), []);
+  const uniforms = useMemo(() => ({
+    iTime: { value: 0 },
+    iMouse: { value: new THREE.Vector2() },
+    iResolution: { value: new THREE.Vector3() }
+  }), []);
 
-  // Update the material properties on each frame
   useFrame(() => {
-    material.uniforms.iTime.value = clock.getElapsedTime();
-    material.uniforms.iMouse.value = mouse;
-    material.uniforms.iResolution.value.set(size.width, size.height, 1);
+    uniforms.iTime.value = clock.getElapsedTime();
+    uniforms.iMouse.value = mouse;
+    uniforms.iResolution.value.set(size.width, size.height, 1);
   });
 
-  // Set the mesh to cover the entire screen and disable depth test
+  const StarNestMaterial = useMemo(() => shaderMaterial(
+    { iTime: 0, iMouse: new THREE.Vector2(), iResolution: new THREE.Vector3() },
+    vertexShader,
+    fragmentShader
+  ), []);
+
   useEffect(() => {
     if (ref.current) {
-      const mesh = ref.current;
-      (mesh.material as THREE.Material).depthTest = false;
-      mesh.renderOrder = -1;
+      (ref.current.material as THREE.ShaderMaterial).uniforms = uniforms;
     }
-  }, []);
+  }, [uniforms]);
 
   return (
-    <mesh ref={ref as any} position={[0, 0, -1]} scale={[size.width, size.height, 1]}>
-      <planeBufferGeometry attach="geometry" args={[2, 2]} />
-      <primitive object={material} attach="material" />
+    <mesh ref={ref as any} position={[0, 0, 0]}>
+      <planeGeometry args={[size.width, size.height]} />
+      <primitive object={StarNestMaterial} attach="material" />
     </mesh>
   );
 }

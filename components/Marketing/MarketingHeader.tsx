@@ -22,7 +22,7 @@ export function MarketingHeader({
           variant="secondary"
           className={styles.heroAction}
         >
-          Discovery Call
+          Book Discovery Call
         </LinkButton>
       </Container>
     </header>

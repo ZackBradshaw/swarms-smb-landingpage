@@ -21,33 +21,17 @@ function Feature({ title, description, className, ...props }: FeatureProps) {
   );
 }
 
-function InstallationDropdown() {
-  return (
-    <details className={styles.installationDropdown}>
-      <summary className={styles.dropdownSummary}>
-        Installation Instructions
-      </summary>
-      <div className={styles.dropdownContent}>
-        <pre>
-          <code>pip3 install --upgrade swarms</code>
-        </pre>
-      </div>
-    </details>
-  );
-}
-
 // new button to send to calendly
 export default function Index() {
   return (
     <MarketingLayout>
       <Container className={styles.section}>
         <div className={styles.heroInfo}>
-          <h1 className={styles.heroTitle}>
-            Build, Deploy, and Scale Reliable Autonomous Agents{" "}
-          </h1>
+          <h1 className={styles.heroTitle}>Automate Tasks with Swarms</h1>
           <p className={styles.heroLead}>
-            Swarms is a modular framework that enables you to build and
-            orchestrate autonomous agents at scale to automate real-world tasks.
+            Swarms is a modular framework that enables you to build reliable,
+            high-performance, and useful autonomous agents at scale to automate
+            real-world tasks.
           </p>
         </div>
         <div className={styles.heroActions}>
@@ -56,7 +40,7 @@ export default function Index() {
             target="_blank"
             variant="secondary"
           >
-            Discovery Call
+            Book Discovery Call
           </LinkButton>
           <LinkButton
             href="https://github.com/kyegomez/swarms"
@@ -65,14 +49,6 @@ export default function Index() {
           >
             Learn more
           </LinkButton>
-        </div>
-      </Container>
-      <Container className={styles.section}>
-        <h2 className={styles.sectionTitle}>Installation</h2>
-        <div className={styles.installationInstructions}>
-          <pre>
-            <code>pip3 install --upgrade swarms</code>
-          </pre>
         </div>
       </Container>
       <Container className={styles.section}>
@@ -256,7 +232,7 @@ export default function Index() {
             target="_blank"
             variant="secondary"
           >
-            Discovery Call
+            Book Discovery Call
           </LinkButton>
           <LinkButton
             href="https://docs.google.com/forms/d/e/1FAIpQLScwik5_xlBq9jF_a1ya8GDpWCiq3o4wx7pful87oRpKzcBJKA/viewform?usp=sf_link"
